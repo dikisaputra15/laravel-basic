@@ -44,6 +44,13 @@ Route::get('/pdelete/category/{id}',[CategoryController::class, 'Pdelete']);
 // brand controller
 Route::get('/brand/all',[BrandController::class, 'AllBrand'])->name('all.brand');
 Route::post('/brand/add',[BrandController::class, 'StoreBrand'])->name('store.brand');
+Route::get('/brand/edit/{id}',[BrandController::class, 'Edit']);
+Route::post('/brand/update/{id}',[BrandController::class, 'Update']);
+Route::get('/brand/delete/{id}',[BrandController::class, 'Delete']);
+
+//Multi Image
+Route::get('/multi/all',[BrandController::class, 'Multpic'])->name('multi.image');
+Route::post('/multi/add',[BrandController::class, 'StoreImg'])->name('store.image');
 
 Route::middleware([
     'auth:sanctum',
@@ -52,6 +59,6 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         $users = User::all();
-        return view('dashboard',compact('users'));
+        return view('admin.index');
     })->name('dashboard');
 });
