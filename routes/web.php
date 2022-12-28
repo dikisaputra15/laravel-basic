@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +21,8 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $brands = DB::table('brands')->get();
+    return view('home', compact('brands'));
 });
 
 Route::get('/home', function () {
@@ -51,6 +54,14 @@ Route::get('/brand/delete/{id}',[BrandController::class, 'Delete']);
 //Multi Image
 Route::get('/multi/all',[BrandController::class, 'Multpic'])->name('multi.image');
 Route::post('/multi/add',[BrandController::class, 'StoreImg'])->name('store.image');
+
+//admin all route
+Route::get('/home/slider',[HomeController::class, 'HomeSlider'])->name('home.slider');
+Route::get('/add/slider',[HomeController::class, 'AddSlider'])->name('add.slider');
+Route::post('/store/slider',[HomeController::class, 'StoreSlider'])->name('store.slider');
+
+//home about
+Route::get('/home/About',[AboutController::class, 'HomeAbout'])->name('home.about');
 
 Route::middleware([
     'auth:sanctum',
