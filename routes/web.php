@@ -81,6 +81,7 @@ Route::post('/admin/store/contact',[ContactController::class, 'AdminStoreContact
 
 //home contact page 
 Route::get('/contact',[ContactController::class, 'Contact'])->name('contact');
+Route::post('/contact/form',[ContactController::class, 'ContactForm'])->name('contact.form');
 
 Route::middleware([
     'auth:sanctum',
